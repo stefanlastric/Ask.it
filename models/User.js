@@ -14,6 +14,21 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  website: {
+    type: String
+  },
+  country: {
+    type: String
+  },
+  work: {
+    type: String
+  },
+  age: {
+    type: String
+  },
+  experience: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now
