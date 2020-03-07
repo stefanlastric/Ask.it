@@ -34,6 +34,7 @@ router.post(
       return res.status(422).json({ errors: errors.array() });
     }
 
+    //TODO  dodati skipValue za load more funkcionalnost ili smisliti nesto bolje
     const { name, email, password, skipValue } = req.body;
 
     try {

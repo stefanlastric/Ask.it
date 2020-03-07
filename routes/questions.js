@@ -50,7 +50,7 @@ router.get('/', auth, async (req, res) => {
   try {
     const questions = await Question.find()
       .sort({ likes: 1 })
-      .limit(20);
+      .limit(10);
     res.json(questions);
   } catch (err) {
     console.error(err.message);
@@ -88,7 +88,7 @@ router.delete('/:id', auth, async (req, res) => {
       return res.status(404).json({ errors: [{ msg: 'Question not found' }] });
     }
 
-    //check user
+    //check user authorization (objectid.toString != string)
     if (question.user.toString() !== req.user.id) {
       return res.status(401).json({ errors: [{ msg: 'User not authorized' }] });
     }
