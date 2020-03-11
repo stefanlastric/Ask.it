@@ -1,17 +1,14 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
+import { Row, Image, Col } from 'react-bootstrap';
 const Landing = () => {
   return (
-    <section className='landing'>
-      <div className='dark-overlay'>
-        <div className='landing-inner'>
-          <h1 className='x-large'>Ask.it</h1>
-        </div>
-      </div>
-    </section>
+    <>
+      <Row className='budinasredini'>
+        <Col sm={0}>
+          <div className='budinasredini'> Welcome</div>
+        </Col>
+      </Row>
+    </>
   );
 };
 

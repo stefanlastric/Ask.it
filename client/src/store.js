@@ -3,6 +3,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
+// thunk (middleware) is needed for use of "dispatch" in actions
+
 const initialState = {};
 
 const middleware = [thunk];

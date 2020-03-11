@@ -1,22 +1,28 @@
 import { Navbar, Nav } from 'react-bootstrap';
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-// import { logout } from '../../actions/auth';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/auth';
 
 import './Navbar.css';
 
-export const AppNavBar = () => {
+const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLink = (
     <Nav className='ml-auto'>
+      <Nav.Item>
+        <Nav.Link to='/myquestions' exact as={NavLink}>
+          My Questions
+        </Nav.Link>
+      </Nav.Item>
       <Nav.Item>
         <Nav.Link to='/profile' exact as={NavLink}>
           Profile
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        {' '}
-        <Nav.Link to='/myquestions' exact as={NavLink}>
-          My Questions
+        <Nav.Link onClick={logout} href='#!'>
+          Logout
         </Nav.Link>
       </Nav.Item>
     </Nav>
@@ -59,10 +65,23 @@ export const AppNavBar = () => {
         </Nav>
 
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='basic-navbar-nav'></Navbar.Collapse>
+        <Navbar.Collapse id='basic-navbar-nav'>
+          {!loading && (
+            <Fragment>{isAuthenticated ? authLink : guestLinks}</Fragment>
+          )}
+        </Navbar.Collapse>
       </Navbar>
     </div>
   );
 };
 
-export default AppNavBar;
+AppNavbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { logout })(AppNavbar);

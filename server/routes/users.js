@@ -6,11 +6,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
-// @route   GET users
-// @desc    Test route
-// @access  Public
-router.get('/', (req, res) => res.send('User route'));
-
 // @route   Post users
 // @desc    Register route
 // @access  Public

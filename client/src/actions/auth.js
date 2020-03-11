@@ -15,20 +15,19 @@ import setToken from '../token/setToken';
 export const loadUser = () => async dispatch => {
   if (localStorage.token) {
     setToken(localStorage.token);
+    console.log('toekn postavi');
+  }
 
-    try {
-      const res = await axios.get('/login');
-
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data
-      });
-    } catch (err) {
-      dispatch({
-        type: AUTH_ERROR
-      });
-    }
-  } else {
+  try {
+    console.log('Ovde prvo');
+    const res = await axios.get('/login');
+    console.log('Ovde trece');
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data
+    });
+  } catch (err) {
+    console.log('Ovde drugo');
     dispatch({
       type: AUTH_ERROR
     });

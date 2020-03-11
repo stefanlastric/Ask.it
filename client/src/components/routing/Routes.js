@@ -10,13 +10,20 @@ import Profile from '../auth/Profile';
 
 class Routes extends React.Component {
   render() {
+    console.log(this.props);
+    const { isAuthenticated } = this.props;
     return (
       <section className='container'>
         <Switch>
           <Route exact path='/register' component={Register} />
           <Route exact path='/questions' component={Questions} />
           <Route exact path='/login' component={Login} />
-
+          {isAuthenticated && (
+            <Route private path='/myquestions' component={MyQuestions} />
+          )}
+          {isAuthenticated && (
+            <Route private path='/profile' component={Profile} />
+          )}
           <Route component={NotFound} />
         </Switch>
       </section>
@@ -24,14 +31,8 @@ class Routes extends React.Component {
   }
 }
 
-export default Routes;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 
-/*
-{isAuthenticated && (
-            <Route private path='/myquestions' component={MyQuestions} />
-          )}
-          {isAuthenticated && (
-            <Route private path='/profile' component={Profile} />
-          )}
-
-          */
+export default connect(mapStateToProps)(Routes);

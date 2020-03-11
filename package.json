@@ -25,6 +25,8 @@
     "concurrently": "^5.0.2"
   },
   "dependencies": {
-    "cors": "^2.8.5"
-  }
+    "cors": "^2.8.5",
+    "uuid": "^7.0.2"
+  },
+  "proxy": "http://localhost:5000"
 }
