@@ -1,12 +1,4 @@
 html,
-body,
-#app,
-#app > div,
-#root {
-  height: 100%;
-}
-
-html,
 body {
   height: 100%;
   width: 100%;
@@ -22,7 +14,8 @@ body {
 
 .container {
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .App-link {
@@ -33,39 +26,4 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-}
-
-/* Question Page */
-.question-form .question-form-header {
-  background: var(--primary-color);
-  padding: 0.5rem;
-}
-
-.question {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-gap: 2rem;
-  align-items: center;
-}
-
-.question > div:first-child {
-  text-align: center;
-}
-
-.question img {
-  width: 100px;
-}
-
-.question .answer-count {
-  background: var(--light-color);
-  color: var(--primary-color);
-  padding: 0.1rem 0.2rem;
-  border-radius: 5px;
-  font-size: 0.8rem;
-}
-
-.question .question-date {
-  color: #aaa;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
 }

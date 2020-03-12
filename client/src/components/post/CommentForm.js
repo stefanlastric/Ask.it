@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addComment } from '../../actions/post';
 
-const CommentForm = ({ postId, addComment }) => {
+const CommentForm = ({ postId, addComment, isAuthenticated }) => {
   const [text, setText] = useState('');
 
   return (
@@ -37,8 +37,4 @@ const CommentForm = ({ postId, addComment }) => {
 CommentForm.propTypes = {
   addComment: PropTypes.func.isRequired
 };
-
-export default connect(
-  null,
-  { addComment }
-)(CommentForm);
+export default connect(null, { addComment })(CommentForm);

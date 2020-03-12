@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
@@ -20,7 +20,10 @@ const Login = ({ login, isAuthenticated }) => {
     e.preventDefault();
     login(email, password);
   };
-
+  //Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
+  }
   return (
     <Fragment>
       <Row className='justify-content-center'>

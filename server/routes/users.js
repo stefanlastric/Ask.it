@@ -6,6 +6,19 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
+// @route    GET users
+// @desc     Get all users sorted by likes
+// @access   Public
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find().sort({ likes: 1 });
+    res.json(users);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route   Post users
 // @desc    Register route
 // @access  Public

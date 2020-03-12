@@ -46,7 +46,7 @@ router.post(
 );
 
 //@route    GET posts
-//@desc     Get all posts
+//@desc     Get all posts sort by likes and limit to 20
 //@access   Private
 router.get('/', auth, async (req, res) => {
   try {

@@ -3,33 +3,37 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
 
-const PostForm = ({ addPost }) => {
+const PostForm = ({ addPost, isAuthenticated }) => {
   const [text, setText] = useState('');
 
   return (
     <div className='post-form'>
-      <div className='bg-primary p'>
-        <h3>Question and Answers</h3>
+      <div>
+        <h3>Questions and Answers</h3>
       </div>
-      <form
-        className='form my-1'
-        onSubmit={e => {
-          e.preventDefault();
-          addPost({ text });
-          setText('');
-        }}
-      >
-        <textarea
-          name='text'
-          cols='30'
-          rows='5'
-          placeholder='Ask a question...'
-          value={text}
-          onChange={e => setText(e.target.value)}
-          required
-        />
-        <input type='submit' className='btn btn-dark my-1' value='Submit' />
-      </form>
+      <div>
+        {isAuthenticated && (
+          <form
+            className='form my-1'
+            onSubmit={e => {
+              e.preventDefault();
+              addPost({ text });
+              setText('');
+            }}
+          >
+            <textarea
+              name='text'
+              cols='30'
+              rows='5'
+              placeholder='Ask a question...'
+              value={text}
+              onChange={e => setText(e.target.value)}
+              required
+            />
+            <input type='submit' className='btn btn-dark my-1' value='Submit' />
+          </form>
+        )}
+      </div>
     </div>
   );
 };
@@ -38,7 +42,8 @@ PostForm.propTypes = {
   addPost: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  { addPost }
-)(PostForm);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { addPost })(PostForm);

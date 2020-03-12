@@ -11,17 +11,27 @@ const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLink = (
     <Nav className='ml-auto'>
       <Nav.Item>
-        <Nav.Link to='/myposts' exact as={NavLink}>
+        <Nav.Link
+          to='/myposts'
+          exact
+          as={NavLink}
+          activeStyle={{ color: '#ED5035' }}
+        >
           My Questions
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link to='/profile' exact as={NavLink}>
+        <Nav.Link
+          to='/profile'
+          exact
+          as={NavLink}
+          activeStyle={{ color: '#ED5035' }}
+        >
           Profile
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={logout} href='#!'>
+        <Nav.Link onClick={logout} href='#' activeStyle={{ color: '#ED5035' }}>
           Logout
         </Nav.Link>
       </Nav.Item>
@@ -45,7 +55,7 @@ const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   return (
     <div className='navigation-bar'>
-      <Navbar expand='lg'>
+      <Navbar>
         <Nav>
           <Navbar.Brand to='/' exact as={NavLink}>
             Ask.it
