@@ -4,23 +4,23 @@ import { Route, Switch } from 'react-router-dom';
 import Register from '../auth/Register';
 import Login from '../auth/Login';
 import NotFound from '../layout/NotFound';
-import Questions from '../questions/Questions';
-import MyQuestions from '../questions/MyQuestions';
 import Profile from '../auth/Profile';
+import Posts from '../posts/Posts';
+import Post from '../post/Post';
 
 class Routes extends React.Component {
   render() {
-    console.log(this.props);
     const { isAuthenticated } = this.props;
     return (
       <section className='container'>
         <Switch>
           <Route exact path='/register' component={Register} />
-          <Route exact path='/questions' component={Questions} />
+          <Route exact path='/posts' component={Posts} />
           <Route exact path='/login' component={Login} />
           {isAuthenticated && (
-            <Route private path='/myquestions' component={MyQuestions} />
+            <Route private path='/posts/:id' component={Post} />
           )}
+
           {isAuthenticated && (
             <Route private path='/profile' component={Profile} />
           )}

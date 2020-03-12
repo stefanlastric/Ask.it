@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const QuestionSchema = new Schema(
+const PostSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
@@ -14,6 +14,9 @@ const QuestionSchema = new Schema(
     name: {
       type: String
     },
+    avatar: {
+      type: String
+    },
     likes: [
       {
         user: {
@@ -22,7 +25,7 @@ const QuestionSchema = new Schema(
         }
       }
     ],
-    answers: [
+    comments: [
       {
         user: {
           type: Schema.Types.ObjectId,
@@ -35,19 +38,14 @@ const QuestionSchema = new Schema(
         name: {
           type: String
         },
-        date: {
-          type: Date,
-          default: Date.now
+        avatar: {
+          type: String
         }
       },
       { timestamps: true }
-    ],
-    date: {
-      type: Date,
-      default: Date.now
-    }
+    ]
   },
   { timestamps: true }
 );
 
-module.exports = Question = mongoose.model('question', QuestionSchema);
+module.exports = Post = mongoose.model('post', PostSchema);

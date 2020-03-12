@@ -19,15 +19,13 @@ export const loadUser = () => async dispatch => {
   }
 
   try {
-    console.log('Ovde prvo');
     const res = await axios.get('/login');
-    console.log('Ovde trece');
     dispatch({
       type: USER_LOADED,
       payload: res.data
     });
   } catch (err) {
-    console.log('Ovde drugo');
+    console.log('Pada ovdje');
     dispatch({
       type: AUTH_ERROR
     });

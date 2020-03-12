@@ -11,7 +11,7 @@ const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLink = (
     <Nav className='ml-auto'>
       <Nav.Item>
-        <Nav.Link to='/myquestions' exact as={NavLink}>
+        <Nav.Link to='/myposts' exact as={NavLink}>
           My Questions
         </Nav.Link>
       </Nav.Item>
@@ -58,7 +58,7 @@ const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           </Nav.Item>
           <Nav.Item>
             {' '}
-            <Nav.Link to='/questions' exact as={NavLink}>
+            <Nav.Link to='/posts' exact as={NavLink}>
               Questions
             </Nav.Link>
           </Nav.Item>
