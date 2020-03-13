@@ -7,11 +7,11 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 
 // @route    GET users
-// @desc     Get all users sorted by likes
+// @desc     Get all users sorted by comment number
 // @access   Public
 router.get('/', async (req, res) => {
   try {
-    const users = await User.find().sort({ likes: 1 });
+    const users = await User.find().sort({ brojkomentara: -1 });
     res.json(users);
   } catch (err) {
     console.error(err.message);

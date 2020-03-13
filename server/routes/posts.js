@@ -48,7 +48,7 @@ router.post(
 //@route    GET posts
 //@desc     Get all posts sort by likes and limit to 20
 //@access   Private
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const posts = await Post.find()
       .sort({ likes: 1 })
@@ -63,7 +63,7 @@ router.get('/', auth, async (req, res) => {
 //@route    GET posts LOAD MORE
 //@desc     Get all posts Load More
 //@access   Private
-router.get('/load', auth, async (req, res) => {
+router.get('/load', async (req, res) => {
   try {
     const number = parseInt(req.query.limit);
     const posts = await Post.find()
@@ -79,10 +79,10 @@ router.get('/load', auth, async (req, res) => {
 //@route    GET posts
 //@desc     Get all posts by user comment
 //@access   Private
-router.get('/postsbyuser', auth, async (req, res) => {
+router.get('/postsbyuser', async (req, res) => {
   try {
     const posts = await Post.find()
-      .sort({ likes: 1 })
+      .sort({ likes: -1 })
       .limit(20);
     res.json(posts);
   } catch (err) {
@@ -94,7 +94,7 @@ router.get('/postsbyuser', auth, async (req, res) => {
 //@route    GET posts/:id
 //@desc     Get post by ID
 //@access   Private
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
@@ -215,17 +215,19 @@ router.post(
       const user = await User.findById(req.user.id).select('-password');
       const post = await Post.findById(req.params.id);
 
+      user.brojkomentara++;
+
+      await user.save();
+
       const newComment = {
         text: req.body.text,
         name: user.name,
-        avatar: user.avatar,
         user: req.user.id
       };
 
       post.comments.unshift(newComment);
 
       await post.save();
-
       res.json(post.comments);
     } catch (err) {
       console.error(err.message);

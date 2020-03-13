@@ -7,7 +7,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  GET_USERS
 } from './types';
 
 import setToken from '../token/setToken';
@@ -15,7 +16,6 @@ import setToken from '../token/setToken';
 export const loadUser = () => async dispatch => {
   if (localStorage.token) {
     setToken(localStorage.token);
-    console.log('toekn postavi');
   }
 
   try {

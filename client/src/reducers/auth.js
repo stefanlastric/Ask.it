@@ -6,7 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
+  GET_USERS
 } from '../actions/types';
 
 const initialState = {
@@ -19,6 +20,12 @@ const initialState = {
 export default function(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case GET_USERS:
+      return {
+        ...state,
+        posts: payload,
+        loading: false
+      };
     case USER_LOADED:
       return {
         ...state,

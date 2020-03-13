@@ -8,7 +8,7 @@ import { deleteComment } from '../../actions/post';
 const CommentItem = ({
   postId,
   comment: { _id, text, name, user, date },
-  auth,
+  isAuthenticated,
   deleteComment
 }) => (
   <div className='post bg-white p-1 my-1'>
@@ -22,7 +22,7 @@ const CommentItem = ({
       <p className='post-date'>
         Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
       </p>
-      {!auth.loading && user === auth.user._id && (
+      {isAuthenticated && (
         <button
           onClick={() => deleteComment(postId, _id)}
           type='button'
@@ -38,12 +38,12 @@ const CommentItem = ({
 CommentItem.propTypes = {
   postId: PropTypes.string.isRequired,
   comment: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.object.isRequired,
   deleteComment: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { deleteComment })(CommentItem);

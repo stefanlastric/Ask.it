@@ -8,7 +8,7 @@ import CommentForm from '../post/CommentForm';
 import CommentItem from '../post/CommentItem';
 import { getPost } from '../../actions/post';
 
-const Post = ({ getPost, post: { post, loading }, match }) => {
+const Post = ({ getPost, post: { post, loading }, isAuthenticated, match }) => {
   useEffect(() => {
     getPost(match.params.id);
   }, [getPost]);
@@ -20,6 +20,11 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
       <Link to='/posts' className='btn'>
         Back To Posts
       </Link>
+      {isAuthenticated && (
+        <Link to='/myquestions' className='btn'>
+          Back To My Questions
+        </Link>
+      )}
       <PostItem post={post} showActions={false} />
       <CommentForm postId={post._id} />
       <div className='comments'>
@@ -33,14 +38,13 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
 
 Post.propTypes = {
   getPost: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(
-  mapStateToProps,
-  { getPost }
-)(Post);
+export default connect(mapStateToProps, { getPost })(Post);

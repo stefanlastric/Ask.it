@@ -1,11 +1,10 @@
 import React, { Fragment, useEffect, Button } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPosts } from '../../actions/post';
+import { getPosts, getPostsLoad } from '../../actions/post';
 import PostItem from '../posts/PostItem';
 import Spinner from '../layout/Spinner';
 
-const num = 0;
 const Landing = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
     getPosts();

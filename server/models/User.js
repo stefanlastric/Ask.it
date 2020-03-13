@@ -14,6 +14,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  brojkomentara: {
+    type: Number,
+    default: 0
+  },
   website: {
     type: String
   },

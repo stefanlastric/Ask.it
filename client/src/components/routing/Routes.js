@@ -24,6 +24,9 @@ class Routes extends React.Component {
             <Route private path='/myquestions' component={MyQuestions} />
           )}
           {isAuthenticated && (
+            <Route private path='/myquestions/:id' component={Post} />
+          )}
+          {isAuthenticated && (
             <Route private path='/profile' component={Profile} />
           )}
           <Route component={NotFound} />
