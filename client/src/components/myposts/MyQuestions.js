@@ -1,12 +1,12 @@
-import React, { Fragment, useEffect, Button } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPosts } from '../../actions/post';
-import PostItem from '../posts/PostItem';
 import Spinner from '../layout/Spinner';
+import PostItem from './PostItem';
+import PostForm from './PostForm';
+import { getPosts } from '../../actions/post';
 
-const num = 0;
-const Landing = ({ getPosts, post: { posts, loading } }) => {
+const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
     getPosts();
   }, []);
@@ -14,7 +14,7 @@ const Landing = ({ getPosts, post: { posts, loading } }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <h2>Question list</h2>
+      <PostForm />
       <div className='posts'>
         {posts.map(post => (
           <PostItem key={post._id} post={post} />
@@ -24,7 +24,7 @@ const Landing = ({ getPosts, post: { posts, loading } }) => {
   );
 };
 
-Landing.propTypes = {
+Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired
 };
@@ -33,4 +33,4 @@ const mapStateToProps = state => ({
   post: state.post
 });
 
-export default connect(mapStateToProps, { getPosts })(Landing);
+export default connect(mapStateToProps, { getPosts })(Posts);

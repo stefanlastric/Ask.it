@@ -6,7 +6,8 @@ import {
   DELETE_POST,
   ADD_POST,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  GET_POST_LOAD
 } from '../actions/types';
 const initialState = {
   posts: [],
@@ -26,6 +27,12 @@ export default function(state = initialState, action) {
         loading: false
       };
     case GET_POST:
+      return {
+        ...state,
+        post: payload,
+        loading: false
+      };
+    case GET_POST_LOAD:
       return {
         ...state,
         post: payload,

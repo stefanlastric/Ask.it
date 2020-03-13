@@ -8,7 +8,8 @@ import {
   DELETE_POST,
   ADD_POST,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  GET_POST_LOAD
 } from './types';
 
 // Get posts
@@ -28,6 +29,22 @@ export const getPosts = () => async dispatch => {
   }
 };
 
+// Get posts by UserId
+export const getPostsLoad = num => async dispatch => {
+  try {
+    const res = await axios.get(`/posts/load?limit=${num}`);
+
+    dispatch({
+      type: GET_POST_LOAD,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
 // Add like
 export const addLike = id => async dispatch => {
   try {

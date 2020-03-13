@@ -33,7 +33,7 @@ const PostItem = ({
               className='btn btn-secondary'
               onClick={() => addLike(_id)}
             >
-              <i className='fas fa-thumbs-up' />{' '}
+              <i className='fas fa-thumbs-up lg' />{' '}
               <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
             </button>
             <button
@@ -41,7 +41,7 @@ const PostItem = ({
               className='btn btn-secondary'
               onClick={() => removeLike(_id)}
             >
-              <i className='fas fa-thumbs-down'></i>
+              <i className='fas fa-thumbs-down lg'></i>
             </button>
             <Link to={`/posts/${_id}`} className='btn btn-primary'>
               Answers{' '}
@@ -53,7 +53,7 @@ const PostItem = ({
               <button
                 onClick={() => deletePost(_id)}
                 type='button'
-                className='btn btn-danger'
+                className='btn btn-danger lg'
               ></button>
             )}
           </Fragment>

@@ -60,6 +60,37 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+//@route    GET posts LOAD MORE
+//@desc     Get all posts Load More
+//@access   Private
+router.get('/load', auth, async (req, res) => {
+  try {
+    const number = parseInt(req.query.limit);
+    const posts = await Post.find()
+      .skip(number)
+      .limit(20);
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route    GET posts
+//@desc     Get all posts by user comment
+//@access   Private
+router.get('/postsbyuser', auth, async (req, res) => {
+  try {
+    const posts = await Post.find()
+      .sort({ likes: 1 })
+      .limit(20);
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 //@route    GET posts/:id
 //@desc     Get post by ID
 //@access   Private

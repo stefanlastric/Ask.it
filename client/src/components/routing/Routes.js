@@ -7,6 +7,7 @@ import NotFound from '../layout/NotFound';
 import Profile from '../auth/Profile';
 import Posts from '../posts/Posts';
 import Post from '../post/Post';
+import MyQuestions from '../myposts/MyQuestions';
 
 class Routes extends React.Component {
   render() {
@@ -17,10 +18,11 @@ class Routes extends React.Component {
           <Route exact path='/register' component={Register} />
           <Route exact path='/posts' component={Posts} />
           <Route exact path='/login' component={Login} />
-          {isAuthenticated && (
-            <Route private path='/posts/:id' component={Post} />
-          )}
+          <Route exact path='/posts/:id' component={Post} />
 
+          {isAuthenticated && (
+            <Route private path='/myquestions' component={MyQuestions} />
+          )}
           {isAuthenticated && (
             <Route private path='/profile' component={Profile} />
           )}

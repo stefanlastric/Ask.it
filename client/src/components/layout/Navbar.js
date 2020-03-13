@@ -12,7 +12,7 @@ const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <Nav className='ml-auto'>
       <Nav.Item>
         <Nav.Link
-          to='/myposts'
+          to='/myquestions'
           exact
           as={NavLink}
           activeStyle={{ color: '#ED5035' }}
