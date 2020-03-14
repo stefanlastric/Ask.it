@@ -8,7 +8,7 @@ import Profile from '../auth/Profile';
 import Posts from '../posts/Posts';
 import Post from '../post/Post';
 import MyQuestions from '../myposts/MyQuestions';
-
+import Test from '../layout/Test';
 class Routes extends React.Component {
   render() {
     const { isAuthenticated } = this.props;
@@ -19,6 +19,7 @@ class Routes extends React.Component {
           <Route exact path='/posts' component={Posts} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/posts/:id' component={Post} />
+          <Route exact path='/test' component={Test} />
 
           {isAuthenticated && (
             <Route private path='/myquestions' component={MyQuestions} />

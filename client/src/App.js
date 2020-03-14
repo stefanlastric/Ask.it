@@ -10,6 +10,7 @@ import store from './store';
 import { loadUser } from './actions/auth';
 import setToken from './token/setToken';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 if (localStorage.token) {

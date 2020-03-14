@@ -10,7 +10,8 @@ import {
   ADD_COMMENT,
   REMOVE_COMMENT,
   GET_POST_LOAD,
-  GET_USERS
+  GET_USERS,
+  USER_ERROR
 } from './types';
 
 // Get posts
@@ -46,22 +47,7 @@ export const getPostsLoad = num => async dispatch => {
     });
   }
 };
-// Get users
-export const getUsers = () => async dispatch => {
-  try {
-    const res = await axios.get('/users');
 
-    dispatch({
-      type: GET_USERS,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
 // Add like
 export const addLike = id => async dispatch => {
   try {

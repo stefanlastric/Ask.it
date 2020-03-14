@@ -18,3 +18,4 @@ export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const GET_POST = 'GET_POST';
 export const GET_USERS = 'GET_USERS';
 export const GET_POST_LOAD = 'GET_POST_LOAD';
+export const USER_ERROR = 'USER_ERROR';

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { deleteComment } from '../../actions/post';
+import Button from 'react-bootstrap/Button';
 
 const CommentItem = ({
   postId,
@@ -23,13 +24,13 @@ const CommentItem = ({
         Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
       </p>
       {isAuthenticated && (
-        <button
+        <Button
           onClick={() => deleteComment(postId, _id)}
-          type='button'
+          type='Button'
           className='btn btn-danger'
         >
           <i className='fas fa-times' />
-        </button>
+        </Button>
       )}
     </div>
   </div>

@@ -51,7 +51,7 @@ router.post(
 router.get('/', async (req, res) => {
   try {
     const posts = await Post.find()
-      .sort({ likes: 1 })
+      .sort({ likes: -1 })
       .limit(20);
     res.json(posts);
   } catch (err) {
@@ -255,6 +255,10 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     if (comment.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'User not authorized' });
     }
+
+    const user = await User.findById(req.user.id).select('-password');
+    user.brojkomentara--;
+    await user.save();
 
     //Get remove index
     const removeIndex = post.comments

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
@@ -37,26 +38,25 @@ const PostItem = ({
 
             {isAuthenticated && (
               <div>
-                <button
-                  type='button'
+                <Button
+                  type='Button'
                   className='btn btn-secondary'
                   onClick={() => addLike(_id)}
                 >
                   <i className='fas fa-thumbs-up lg' />{' '}
                   <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
-                </button>
-                <button
-                  type='button'
+                </Button>
+                <Button
+                  type='Button'
                   className='btn btn-secondary'
                   onClick={() => removeLike(_id)}
                 >
                   <i className='fas fa-thumbs-down lg'></i>
-                </button>
-                <button
+                </Button>
+                <Button
                   onClick={() => deletePost(_id)}
-                  type='button'
-                  className='btn btn-danger lg'
-                ></button>{' '}
+                  className='btn-danger'
+                ></Button>{' '}
               </div>
             )}
           </Fragment>
