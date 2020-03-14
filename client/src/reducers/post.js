@@ -7,9 +7,7 @@ import {
   ADD_POST,
   ADD_COMMENT,
   REMOVE_COMMENT,
-  GET_POST_LOAD,
-  USER_ERROR,
-  GET_USERS
+  GET_POST_LOAD
 } from '../actions/types';
 const initialState = {
   posts: [],
@@ -28,12 +26,6 @@ export default function(state = initialState, action) {
         posts: payload,
         loading: false
       };
-    case GET_USERS:
-      return {
-        ...state,
-        users: payload,
-        loading: false
-      };
     case GET_POST:
       return {
         ...state,
@@ -43,7 +35,7 @@ export default function(state = initialState, action) {
     case GET_POST_LOAD:
       return {
         ...state,
-        post: payload,
+        posts: payload,
         loading: false
       };
     case ADD_POST:
@@ -56,12 +48,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         posts: state.posts.filter(post => post._id !== payload),
-        loading: false
-      };
-    case USER_ERROR:
-      return {
-        ...state,
-        error: payload,
         loading: false
       };
     case POST_ERROR:

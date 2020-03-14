@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPosts, getPostsLoad } from '../../actions/post';
+import { getPosts } from '../../actions/post';
+import { getPostsLoad } from '../../actions/postload';
 import PostItem from '../posts/PostItem';
+import PostItemLoad from '../posts/PostItemLoad';
 import Spinner from '../layout/Spinner';
 import {
   Container,
@@ -10,11 +12,15 @@ import {
   Row,
   Card,
   ListGroup,
-  ListGroupItem
+  ListGroupItem,
+  Button
 } from 'react-bootstrap';
 import { getUsers } from '../../actions/user';
 
 const Landing = ({
+  counter = 0,
+  getPostsLoad,
+  postload: { postsload },
   getPosts,
   post: { posts, loading },
   getUsers,
@@ -23,6 +29,7 @@ const Landing = ({
   useEffect(() => {
     getPosts();
     getUsers();
+    getPostsLoad(counter);
   }, []);
   return loading ? (
     <Spinner />
@@ -30,11 +37,18 @@ const Landing = ({
     <Container>
       <Row>
         <Col>
-          <h2>Question list</h2>
-          <div className='posts'>
-            {posts.map(post => (
-              <PostItem key={post._id} post={post} />
-            ))}
+          <div>
+            <h2>Question list</h2>
+            <div className='postload'>
+              {postsload.map(postload => (
+                <PostItemLoad key={postload._id} postload={postload} />
+              ))}
+            </div>
+            <Button
+              className='primary'
+              text='Load more...'
+              onClick={() => getPostsLoad(counter + 20)}
+            ></Button>
           </div>
         </Col>
         <Col>
@@ -71,14 +85,19 @@ const Landing = ({
 
 Landing.propTypes = {
   getPosts: PropTypes.func.isRequired,
+  getPostsLoad: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
   getUsers: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  postload: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   post: state.post,
-  user: state.user
+  user: state.user,
+  postload: state.postload
 });
 
-export default connect(mapStateToProps, { getPosts, getUsers })(Landing);
+export default connect(mapStateToProps, { getPosts, getUsers, getPostsLoad })(
+  Landing
+);

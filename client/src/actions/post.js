@@ -8,10 +8,7 @@ import {
   DELETE_POST,
   ADD_POST,
   ADD_COMMENT,
-  REMOVE_COMMENT,
-  GET_POST_LOAD,
-  GET_USERS,
-  USER_ERROR
+  REMOVE_COMMENT
 } from './types';
 
 // Get posts
@@ -21,23 +18,6 @@ export const getPosts = () => async dispatch => {
 
     dispatch({
       type: GET_POSTS,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
-
-// Get posts by UserId
-export const getPostsLoad = num => async dispatch => {
-  try {
-    const res = await axios.get(`/posts/load?limit=${num}`);
-
-    dispatch({
-      type: GET_POST_LOAD,
       payload: res.data
     });
   } catch (err) {
