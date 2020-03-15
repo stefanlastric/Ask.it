@@ -27,7 +27,7 @@ const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           as={NavLink}
           activeStyle={{ color: '#ED5035' }}
         >
-          Profile
+          Profiles
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>

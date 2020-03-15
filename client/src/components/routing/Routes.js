@@ -8,7 +8,7 @@ import Profile from '../auth/Profile';
 import Posts from '../posts/Posts';
 import Post from '../post/Post';
 import MyQuestions from '../myposts/MyQuestions';
-import Test from '../layout/Test';
+import Test from '../auth/Test';
 class Routes extends React.Component {
   render() {
     const { isAuthenticated } = this.props;

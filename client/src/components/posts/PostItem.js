@@ -15,13 +15,13 @@ const PostItem = ({
   showActions
 }) => {
   return (
-    <div className='post bg-white p-1 my-1'>
+    <Fragment className='post bg-white p-1 my-1'>
       <div>
         <Link to={`/profile/${user}`}>
           <h4>{name}</h4>
         </Link>
       </div>
-      <div>
+      <Fragment>
         <p className='my-1'>{text}</p>
         <p className='post-date'>
           Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
@@ -36,33 +36,34 @@ const PostItem = ({
               )}
             </Link>
 
-            {isAuthenticated && (
-              <div>
-                <Button
-                  type='Button'
-                  className='btn btn-secondary'
-                  onClick={() => addLike(_id)}
-                >
-                  <i className='fas fa-thumbs-up lg' />{' '}
-                  <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
-                </Button>
-                <Button
-                  type='Button'
-                  className='btn btn-secondary'
-                  onClick={() => removeLike(_id)}
-                >
-                  <i className='fas fa-thumbs-down lg'></i>
-                </Button>
+            <div>
+              <Button
+                type='Button'
+                className='btn btn-secondary'
+                onClick={() => addLike(_id)}
+              >
+                <i className='fas fa-thumbs-up lg' />{' '}
+                <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
+              </Button>
+              <Button
+                type='Button'
+                className='btn btn-secondary'
+                onClick={() => removeLike(_id)}
+              >
+                <i className='fas fa-thumbs-down lg'></i>
+              </Button>
+              {isAuthenticated && (
                 <Button
                   onClick={() => deletePost(_id)}
                   className='btn-danger'
-                ></Button>{' '}
-              </div>
-            )}
+                  value='DELETE'
+                ></Button>
+              )}
+            </div>
           </Fragment>
         )}
-      </div>
-    </div>
+      </Fragment>
+    </Fragment>
   );
 };
 

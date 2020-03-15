@@ -46,13 +46,11 @@ router.post(
 );
 
 //@route    GET posts
-//@desc     Get all posts sort by likes and limit to 20
+//@desc     Get all posts sort by likes
 //@access   Private
 router.get('/', async (req, res) => {
   try {
-    const posts = await Post.find()
-      .sort({ likes: -1 })
-      .limit(20);
+    const posts = await Post.find().sort({ likes: -1 });
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -68,21 +66,6 @@ router.get('/load', async (req, res) => {
     const number = parseInt(req.query.limit);
     const posts = await Post.find()
       .skip(number)
-      .limit(20);
-    res.json(posts);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-});
-
-//@route    GET posts
-//@desc     Get all posts by user comment
-//@access   Private
-router.get('/postsbyuser', async (req, res) => {
-  try {
-    const posts = await Post.find()
-      .sort({ likes: -1 })
       .limit(20);
     res.json(posts);
   } catch (err) {

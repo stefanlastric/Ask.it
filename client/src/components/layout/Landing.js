@@ -12,8 +12,7 @@ import {
   Row,
   Card,
   ListGroup,
-  ListGroupItem,
-  Button
+  ListGroupItem
 } from 'react-bootstrap';
 import { getUsers } from '../../actions/user';
 
@@ -44,11 +43,12 @@ const Landing = ({
                 <PostItemLoad key={postload._id} postload={postload} />
               ))}
             </div>
-            <Button
-              className='primary'
-              text='Load more...'
+            <input
+              type='button'
+              className='btn-primary'
+              value='Load more'
               onClick={() => getPostsLoad(counter + 20)}
-            ></Button>
+            />
           </div>
         </Col>
         <Col>
@@ -62,7 +62,7 @@ const Landing = ({
                 </Card.Body>
                 <ListGroup>
                   <ListGroupItem>
-                    <b>Broj Komentara: </b>
+                    <b>Number of answers: </b>
                     {user.brojkomentara}
                   </ListGroupItem>
                 </ListGroup>

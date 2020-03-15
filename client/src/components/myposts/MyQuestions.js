@@ -2,13 +2,17 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import PostItem from './PostItem';
+import PostItemLoad from './PostItemLoad';
 import PostForm from './PostForm';
-import { getPosts } from '../../actions/post';
+import { getPostsLoad } from '../../actions/postload';
 
-const Posts = ({ getPosts, post: { posts, loading } }) => {
+const Posts = ({
+  getPostsLoad,
+  counter = 0,
+  postload: { postsload, loading }
+}) => {
   useEffect(() => {
-    getPosts();
+    getPostsLoad(counter);
   }, []);
   return loading ? (
     <Spinner />
@@ -16,21 +20,27 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
     <Fragment>
       <PostForm />
       <div className='posts'>
-        {posts.map(post => (
-          <PostItem key={post._id} post={post} />
+        {postsload.map(postload => (
+          <PostItemLoad key={postload._id} postload={postload} />
         ))}
       </div>
+      <input
+        type='submit'
+        value='Load More'
+        className='btn btn-primary'
+        onClick={() => getPostsLoad(counter + 20)}
+      />
     </Fragment>
   );
 };
 
 Posts.propTypes = {
-  getPosts: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
+  getPostsLoad: PropTypes.func.isRequired,
+  postload: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  post: state.post
+  postload: state.postload
 });
 
-export default connect(mapStateToProps, { getPosts })(Posts);
+export default connect(mapStateToProps, { getPostsLoad })(Posts);

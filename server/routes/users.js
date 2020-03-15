@@ -19,6 +19,58 @@ router.get('/', async (req, res) => {
   }
 });
 
+//@route    GET user/:id
+//@desc     Get user by ID
+//@access   Private
+router.get('/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   Post new password
+// @desc    Change password
+// @access  Public
+router.post(
+  '/password',
+  [
+    // Express validation
+    check(
+      'password',
+      'Password must be atleast with 4 or more characters'
+    ).isLength({ min: 4 })
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    try {
+      const user = await User.findById(req.user.id).select('password');
+      const pass = req.body.password;
+      // Password encrypt
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(pass, salt);
+
+      await user.save();
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error');
+    }
+  }
+);
+
 // @route   Post users
 // @desc    Register route
 // @access  Public
@@ -42,8 +94,7 @@ router.post(
       return res.status(422).json({ errors: errors.array() });
     }
 
-    //TODO  dodati skipValue za load more funkcionalnost ili smisliti nesto bolje
-    const { name, email, password, skipValue } = req.body;
+    const { name, email, password } = req.body;
 
     try {
       // Check if user exists
